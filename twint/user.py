@@ -28,7 +28,8 @@ def User(ur):
     _usr.username = ur['data']['user']['legacy']['screen_name']
     _usr.bio = ur['data']['user']['legacy']['description']
     _usr.location = ur['data']['user']['legacy']['location']
-    _usr.url = ur['data']['user']['legacy']['url']
+    # Url is not always supplied
+    _usr.url = [ur['data']['user']['legacy']['url'] if ur['data']['user']['legacy']['url'] is not None else ""]
     # parsing date to user-friendly format
     _dt = ur['data']['user']['legacy']['created_at']
     _dt = datetime.datetime.strptime(_dt, '%a %b %d %H:%M:%S %z %Y')
@@ -46,7 +47,9 @@ def User(ur):
     _usr.is_private = ur['data']['user']['legacy']['protected']
     _usr.is_verified = ur['data']['user']['legacy']['verified']
     _usr.avatar = ur['data']['user']['legacy']['profile_image_url_https']
-    _usr.background_image = ur['data']['user']['legacy']['profile_banner_url']
+    # Url is not always supplied
+    _usr.background_image = [ur['data']['user']['legacy']['profile_banner_url'] if ur['data']['user']['legacy']['profile_banner_url'] is not None else ""]
+
     # TODO : future implementation
     # legacy_extended_profile is also available in some cases which can be used to get DOB of user
     return _usr

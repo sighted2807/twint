@@ -94,7 +94,8 @@ def Tweet(tw, config):
     t.user_id_str = tw["user_id_str"]
     t.username = tw["user_data"]['screen_name']
     t.name = tw["user_data"]['name']
-    t.place = tw['geo'] if 'geo' in tw and tw['geo'] else ""
+    # t.place = tw['geo'] if 'geo' in tw and tw['geo'] else ""
+    t.place = tw['place']
     t.timezone = strftime("%z", localtime())
     t.mentions = _get_mentions(tw)
     t.reply_to = _get_reply_to(tw)
